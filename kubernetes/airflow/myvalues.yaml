@@ -40,10 +40,10 @@ airflowHome: /opt/airflow
 defaultAirflowRepository: apache/airflow
 
 # Default airflow tag to deploy
-defaultAirflowTag: "2.2.1"
+defaultAirflowTag: "2.1.2"
 
 # Airflow version (Used to make some decisions based on Airflow Version being deployed)
-airflowVersion: "2.2.1"
+airflowVersion: "2.1.2"
 
 # Images
 images:
@@ -211,7 +211,7 @@ allowPodLaunching: true
 env: 
   - name: AIRFLOW__CORE__REMOTE_LOGGING
     value: 'True'
-  - name: AIRFLOW__LOGGING_REMOTE_BASE_LOG_FOLDR
+  - name: AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER
     value: "s3://geovani-log/airflow-logs/"
   - name: AIRFLOW__LOGGING_REMOTE_BASE_CONN_ID
     value: "my_aws"
@@ -308,7 +308,7 @@ data:
 
 # Fernet key settings
 # Note: fernetKey can only be set during install, not upgrade
-fernetKey: T8e4PQvBJegrm0mAbXDZ1JKjqwAWF49g39rkKWj8ftQ=
+fernetKey: "T8e4PQvBJegrm0mAbXDZ1JKjqwAWF49g39rkKWj8ftQ="
 fernetKeySecretName: ~
 
 # Flask secret key for Airflow Webserver: `[webserver] secret_key` in airflow.cfg
@@ -772,10 +772,7 @@ webserver:
     #     port: 80
     #     targetPort: 8888
     loadBalancerIP: ~
-    ## Limit load balancer source ips to list of CIDRs
-    # loadBalancerSourceRanges:
-    #   - "10.123.0.0/16"
-    loadBalancerSourceRanges: []
+
 
   # Select certain nodes for airflow webserver pods.
   nodeSelector: {}
@@ -1349,15 +1346,15 @@ dags:
     # ssh examples ssh://git@github.com/apache/airflow.git
     # git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    repo: https://github.com/apache/airflow.git
-    branch: v2-2-stable
+    repo: https://github.com/gLeitao/edc_mod4_exercice_igti.git
+    branch: master
     rev: HEAD
     depth: 1
     # the number of consecutive failures allowed before aborting
     maxFailures: 0
     # subpath within the repo where dags are located
     # should be "" if dags are at repo root
-    subPath: "tests/dags"
+    subPath: "dags"
     # if your repo needs a user name password
     # you can load them to a k8s secret like the one below
     #   ---
